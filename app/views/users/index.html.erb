@@ -1,2 +1,8 @@
 <h1 class="text-center mt-4 mb-4">List of Bloggers</h1>
-<%= render 'user' %>
+<div class="apple_pagination">
+  <%= will_paginate @users, :container => false %>
+</div>
+  <%= render 'user' %>
+<div class="apple_pagination mb-4">
+  <%= will_paginate @users, :container => false %>
+</div>
