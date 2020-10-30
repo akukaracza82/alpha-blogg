@@ -14,7 +14,9 @@
           Articles
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% if logged_in? && @article.user == current_user %>
           <%= link_to "Create new article", new_article_path, class: "dropdown-item" %>
+          <% end %>
           <%= link_to "View Articles", articles_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
