@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-helper_method :current_user, :loggin_in? #this makes sure, that current use is available also
+helper_method :current_user, :logged_in? #this makes sure, that current use is available also
 #for ApplicationHelper, not only for ApplicationController
 
   def current_user
@@ -12,4 +12,19 @@ helper_method :current_user, :loggin_in? #this makes sure, that current use is a
   def logged_in?
     !!current_user # this returns a boolean value, and makes sure user is on
   end
+
+  def require_user
+    if !logged_in?
+      flash[:alert] = "You don't have permission to perform this operation"
+      redirect_to login_path
+    end
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = "You can only edit or delete your own articles"
+      redirect_to @article
+    end
+  end
+
 end
